@@ -1,5 +1,10 @@
 pipeline {
   agent any
+  environment {
+        DOCKERHUB_CREDENTIALS_PSW="f1d00111-ecbc-48ed-b5cf-8d99e2a9e5d4"
+        DOCKERHUB_CREDENTIALS_USR="rishabhbhojak" 
+        
+  }      
   stages {
     stage("verify tooling") {
       steps {
@@ -25,7 +30,7 @@ pipeline {
 //         sh 'docker rm -vf $(docker ps -aq)'
         sh 'alias kill3001="fuser -k -n tcp 3001"'
         sh 'docker-compose up --build'
-//         sh 'docker compose ps'
+//         
       }
     }
     stage('login') {
@@ -45,10 +50,10 @@ pipeline {
 //       }
 //     }
   }
-//   post {
-//     always {
-// //       sh 'docker-compose down'
-// //       sh 'docker compose ps'
-//     }
-//   }
+  post {
+    always {
+      sh 'docker-compose down'
+
+    }
+  }
 }
