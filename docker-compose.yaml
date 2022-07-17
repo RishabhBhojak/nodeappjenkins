@@ -1,0 +1,23 @@
+# DOCKER COMPOSE
+#
+version: "2.0"
+
+services: 
+  mongo_server:
+    image: mongo
+    environment: 
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=example
+      - MONGO_INITDB_DATABASE=db
+    ports:
+      - "27017:27017"
+    container_name: my_db_rishabh
+  app:
+    # build: 
+    #   context: .
+    #   dockerfile: Dockerfile
+    image: rishabhbhojak/loadapp
+    ports: 
+      - 3000:3000
+    depends_on: 
+      - mongo_server
